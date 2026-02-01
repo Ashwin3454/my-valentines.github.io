@@ -14,22 +14,26 @@ setInterval(createHearts, 300);
 
 // Move "No" button function
 function moveButton(button) {
-    const padding = 16;
+    const padding = 20;
 
-    // Move relative to the screen, not container
-    button.style.position = 'fixed';
+    // IMPORTANT: absolute positioning inside body
+    button.style.position = "absolute";
+
+    // Get visible area (not full document)
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight + window.scrollY;
 
     const btnWidth = button.offsetWidth;
     const btnHeight = button.offsetHeight;
 
-    const maxX = window.innerWidth - btnWidth - padding;
-    const maxY = window.innerHeight - btnHeight - padding;
+    const maxX = viewportWidth - btnWidth - padding;
+    const maxY = viewportHeight - btnHeight - padding;
 
-    const x = Math.random() * Math.max(0, maxX);
-    const y = Math.random() * Math.max(0, maxY);
+    const x = Math.random() * Math.max(padding, maxX);
+    const y = Math.random() * Math.max(padding, maxY);
 
-    button.style.left = x + 'px';
-    button.style.top = y + 'px';
+    button.style.left = x + "px";
+    button.style.top = y + "px";
 }
 
 // Navigation functions

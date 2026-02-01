@@ -1,13 +1,35 @@
+ // Create hearts effect
+ function createHearts() {
+    const hearts = document.querySelector('.hearts');
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.innerHTML = '❤';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+    hearts.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+}
+
 setInterval(createHearts, 300);
 
 // Move "No" button function
 function moveButton(button) {
-    const x = Math.random() * (window.innerWidth - button.offsetWidth);
-    const y = Math.random() * (window.innerHeight - button.offsetHeight);
-    
-    button.style.position = 'absolute';
-    button.style.left = `${x}px`;
-    button.style.top = `${y}px`;
+    const padding = 16;
+
+    // Move relative to the screen, not container
+    button.style.position = 'fixed';
+
+    const btnWidth = button.offsetWidth;
+    const btnHeight = button.offsetHeight;
+
+    const maxX = window.innerWidth - btnWidth - padding;
+    const maxY = window.innerHeight - btnHeight - padding;
+
+    const x = Math.random() * Math.max(0, maxX);
+    const y = Math.random() * Math.max(0, maxY);
+
+    button.style.left = x + 'px';
+    button.style.top = y + 'px';
 }
 
 // Navigation functions

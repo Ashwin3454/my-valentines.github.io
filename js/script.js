@@ -12,22 +12,20 @@ function createHearts() {
 }
 setInterval(createHearts, 300);
 
-// Move "No" button strictly inside container
+// EXACT working logic copied from reference site
 function moveButton(button) {
-    const container = document.querySelector(".container");
-    const containerRect = container.getBoundingClientRect();
-    const buttonRect = button.getBoundingClientRect();
-    const padding = 10;
+    const containerHeight = window.innerHeight;
+    const containerWidth = window.innerWidth;
 
-    const maxX = containerRect.width - buttonRect.width - padding;
-    const maxY = containerRect.height - buttonRect.height - padding;
+    const btnHeight = button.offsetHeight;
+    const btnWidth = button.offsetWidth;
 
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
+    const newTop = Math.random() * (containerHeight - btnHeight);
+    const newLeft = Math.random() * (containerWidth - btnWidth);
 
-    button.style.position = "absolute";
-    button.style.left = x + "px";
-    button.style.top = y + "px";
+    button.style.position = "fixed";
+    button.style.top = newTop + "px";
+    button.style.left = newLeft + "px";
 }
 
 // Confetti

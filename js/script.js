@@ -14,19 +14,25 @@ setInterval(createHearts, 300);
 
 // Move "No" button function
 function moveButton(button) {
-    const containerHeight = window.innerHeight;
-    const containerWidth = window.innerWidth;
+    const padding = 12;
 
-    const btnHeight = button.offsetHeight;
-    const btnWidth = button.offsetWidth;
+    const maxX = Math.max(
+        padding,
+        window.innerWidth - button.offsetWidth - padding
+    );
 
-    const newTop = Math.random() * (containerHeight - btnHeight);
-    const newLeft = Math.random() * (containerWidth - btnWidth);
+    const maxY = Math.max(
+        padding,
+        window.innerHeight - button.offsetHeight - padding
+    );
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
 
     button.style.position = "fixed";
-    button.style.top = newTop + "px";
-    button.style.left = newLeft + "px";
-    button.style.zIndex = "999"; // keep above, but not block others
+    button.style.left = x + "px";
+    button.style.top = y + "px";
+}
 
 // Navigation functions
 function goToStep2() {

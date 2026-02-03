@@ -221,3 +221,6 @@ h1 {
         margin-bottom: 10px;
     }
 }
+
+
+.container { position: relative; overflow: hidden; }

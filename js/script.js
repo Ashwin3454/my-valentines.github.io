@@ -10,28 +10,24 @@ function createHearts() {
     hearts.appendChild(heart);
     setTimeout(() => heart.remove(), 5000);
 }
-
 setInterval(createHearts, 300);
 
-// Move "No" button INSIDE viewport only
+// Move "No" button strictly inside container
 function moveButton(button) {
-    const btnWidth = button.offsetWidth;
-    const btnHeight = button.offsetHeight;
-
+    const container = document.querySelector(".container");
+    const containerRect = container.getBoundingClientRect();
+    const buttonRect = button.getBoundingClientRect();
     const padding = 10;
 
-    const maxX = window.innerWidth - btnWidth - padding;
-    const maxY = window.innerHeight - btnHeight - padding;
+    const maxX = containerRect.width - buttonRect.width - padding;
+    const maxY = containerRect.height - buttonRect.height - padding;
 
-    const minX = padding;
-    const minY = padding;
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
 
-    const randomX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
-    const randomY = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
-
-    button.style.position = "fixed";
-    button.style.left = randomX + "px";
-    button.style.top = randomY + "px";
+    button.style.position = "absolute";
+    button.style.left = x + "px";
+    button.style.top = y + "px";
 }
 
 // Confetti

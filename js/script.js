@@ -1,6 +1,5 @@
-
-// Create hearts effect
-function createHearts() {
+ // Create hearts effect
+ function createHearts() {
     const hearts = document.querySelector('.hearts');
     const heart = document.createElement('div');
     heart.classList.add('heart');
@@ -10,9 +9,10 @@ function createHearts() {
     hearts.appendChild(heart);
     setTimeout(() => heart.remove(), 5000);
 }
+
 setInterval(createHearts, 300);
 
-// FIXED: No button moves correctly AND Yes button works
+// Move "No" button function
 function moveButton(button) {
     const containerHeight = window.innerHeight;
     const containerWidth = window.innerWidth;
@@ -27,30 +27,36 @@ function moveButton(button) {
     button.style.top = newTop + "px";
     button.style.left = newLeft + "px";
     button.style.zIndex = "999"; // keep above, but not block others
+
+// Navigation functions
+function goToStep2() {
+    document.getElementById('step1').classList.remove('active');
+    document.getElementById('step2').classList.add('active');
+    triggerConfetti();
 }
 
-// YES button handler (explicit, no side effects)
-document.addEventListener("DOMContentLoaded", () => {
-    const yesBtn = document.querySelector(".yes-btn");
-    const noBtn = document.querySelector(".no-btn");
-    const question = document.getElementById("question");
-    const success = document.getElementById("success");
+function goToStep3() {
+    document.getElementById('step2').classList.remove('active');
+    document.getElementById('step3').classList.add('active');
+    triggerConfetti();
+}
 
-    if (yesBtn) {
-        yesBtn.addEventListener("click", () => {
-            question.style.display = "none";
-            success.style.display = "block";
-            if (noBtn) noBtn.remove();
-            triggerConfetti();
-        });
-    }
-});
+function finalStep() {
+    document.getElementById('step3').classList.remove('active');
+    document.querySelector('.final-message').style.display = 'block';
+    document.querySelector('.whatsapp-btn').style.display = 'inline-block';
+    triggerConfetti();
+    
+    // Additional confetti for the final celebration
+    setTimeout(() => triggerConfetti(), 500);
+    setTimeout(() => triggerConfetti(), 1000);
+    setTimeout(() => triggerConfetti(), 1500);
+}
 
-// Confetti
 function triggerConfetti() {
     confetti({
-        particleCount: 120,
-        spread: 80,
+        particleCount: 100,
+        spread: 70,
         origin: { y: 0.6 }
     });
 }

@@ -12,7 +12,7 @@ function createHearts() {
 }
 setInterval(createHearts, 300);
 
-// EXACT working logic copied from reference site
+// FIXED: No button moves correctly AND Yes button works
 function moveButton(button) {
     const containerHeight = window.innerHeight;
     const containerWidth = window.innerWidth;
@@ -26,13 +26,31 @@ function moveButton(button) {
     button.style.position = "fixed";
     button.style.top = newTop + "px";
     button.style.left = newLeft + "px";
+    button.style.zIndex = "999"; // keep above, but not block others
 }
+
+// YES button handler (explicit, no side effects)
+document.addEventListener("DOMContentLoaded", () => {
+    const yesBtn = document.querySelector(".yes-btn");
+    const noBtn = document.querySelector(".no-btn");
+    const question = document.getElementById("question");
+    const success = document.getElementById("success");
+
+    if (yesBtn) {
+        yesBtn.addEventListener("click", () => {
+            question.style.display = "none";
+            success.style.display = "block";
+            if (noBtn) noBtn.remove();
+            triggerConfetti();
+        });
+    }
+});
 
 // Confetti
 function triggerConfetti() {
     confetti({
-        particleCount: 100,
-        spread: 70,
+        particleCount: 120,
+        spread: 80,
         origin: { y: 0.6 }
     });
 }

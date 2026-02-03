@@ -14,24 +14,12 @@ setInterval(createHearts, 300);
 
 // Move "No" button function
 function moveButton(button) {
-    const padding = 12;
-
-    const maxX = Math.max(
-        padding,
-        window.innerWidth - button.offsetWidth - padding
-    );
-
-    const maxY = Math.max(
-        padding,
-        window.innerHeight - button.offsetHeight - padding
-    );
-
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
-
-    button.style.position = "fixed";
-    button.style.left = x + "px";
-    button.style.top = y + "px";
+    const x = Math.random() * (window.innerWidth - button.offsetWidth);
+    const y = Math.random() * (window.innerHeight - button.offsetHeight);
+    
+    button.style.position = 'absolute';
+    button.style.left = `${x}px`;
+    button.style.top = `${y}px`;
 }
 
 // Navigation functions
